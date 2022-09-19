@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="css/main.css">
   <script defer src="js/main.js"></script>-->
 
+
+
 </head>
 
 <body class="page__body">
@@ -45,7 +47,7 @@
     <nav class="header-main">
 
       <a href="index.html" class="header-main__logo">
-        <img src="../img/logo.png" alt="logo">
+        <img src="../static/img/logo.png" alt="logo">
         <p>Красный Дракон</p>
       </a>
 
@@ -87,91 +89,39 @@
 </header>
 
     <div style="padding: 0 0 100px 0;"></div>
-
-    <section class="profile">
+    <section class="catalog">
   <div class="container">
-    <div class="profile-wrapper">
-
-      <div class="profile-card">
-        <div class="profile-title">Имя</div>
-        <table class="profile-card__table">
-          <tr>
-            <th>Почта: </th>
-            <th> <span>facealex3@yandex.ru</span></th>
-          </tr>
-          <tr>
-            <th>Адрес: </th>
-            <th> <span>г. Москва, улица Пушкина, дом Калатушкина, квартира 10</span></th>
-          </tr>
-          <tr>
-            <th>Номер: </th>
-            <th> <span>+7 915 042-55-33</span></th>
-          </tr>
-          <tr>
-            <th>Дата регистрации:</th>
-            <th> <span>28.08.2022</span></th>
-          </tr>
-        </table>
-
-      </div>
-
-      <div class="profile-card">
-        <div class="profile-title">Изменение профиля</div>
-
-        <form action="" class="profile-edit">
-          <div class="profile-edit__item">
-            <p>Имя</p>
-            <input type="text">
-          </div>
-          <div class="profile-edit__item">
-            <p>Почта</p>
-            <input type="text">
-          </div>
-          <div class="profile-edit__item">
-            <p>Номер</p>
-            <input type="text">
-          </div>
-          <div class="profile-edit__item">
-            <p>Адрес</p>
-            <input  id="address" name="address" type="text" />
-          </div>
-          <button class="profile-edit__btn">Редактировать</button>
-        </form>
+    <div class="catalog-wrapper">
+      <h1 class="catalog-title">Выберите категорию</h1>
+      <ul class="breadcrumb">
+        <li><a class="breadcrumb-link" href="/">Главная страница</a></li>
+        <span class="breadcrumb-separator">
+          ›
+        </span>
+        <li class="breadcrumb-link active"><a href="#">Каталог </a></li>
+      </ul>
+      <div class="catalog-items">
+        <a href="/graphiccard.html" class="catalog-item">
+          <img src="../img/graphiccard.jpeg" alt="Видеокарты">
+          <p>Видеокарты</p>
+        </a>
+        <a href="/cpu.html" class="catalog-item">
+          <img src="../img/cpu.jpeg" alt="Процессоры">
+          <p>Процессоры</p>
+        </a>
+        <a href="/cpu.html" class="catalog-item">
+          <img src="../img/cpu.jpeg" alt="Процессоры">
+          <p>Процессоры</p>
+        </a>
+        <a href="/cpu.html" class="catalog-item">
+          <img src="../img/cpu.jpeg" alt="Процессоры">
+          <p>Процессоры</p>
+        </a>
 
       </div>
-
-      <div class="leftside">
-        <ul class="leftside-ul">
-          <li class="leftside-list"><a href="orders.html" class="leftside-link">
-            Заказы
-          </a></li>
-          <li class="leftside-list leftside-focus"><a href="profile.html" class="leftside-link">
-            Профиль
-          </a></li>
-          <li class="leftside-list"><a href="#" class="leftside-link">
-            Выход
-          </a></li>
-        </ul>
-      </div>
-
     </div>
   </div>
 </section>
-
-<script>
-  $("#address").suggestions({
-      token: "3c84fd2235a8dc2fbaa7804f222ae49d378242c1",
-      type: "ADDRESS",
-      /* Вызывается, когда пользователь выбирает одну из подсказок */
-      onSelect: function(suggestion) {
-          console.log(suggestion);
-      }
-  });
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/css/suggestions.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/js/jquery.suggestions.min.js"></script>
 
     <footer class="footer">
   <div class="container">
