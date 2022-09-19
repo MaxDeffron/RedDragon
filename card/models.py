@@ -1,11 +1,12 @@
 from django.db import models
 
-#Получение прямых URl
+# Получение прямых URl
 
 from django.db.models import CharField
 from django.urls import reverse
 
-#Первичная таблица категорий
+
+# Первичная таблица категорий
 
 class Category(models.Model):
     name = models.CharField(max_length=150,
@@ -25,14 +26,15 @@ class Category(models.Model):
 
     # Тут надо написать название шаблона, куда будет выводиться инфа
 
-    def get_absolute_url (self):
+    def get_absolute_url(self):
         return reverse('card:product_list_by_category',
-                      args=[self.slug])
+                       args=[self.slug])
 
-#Первичная таблица Наименование графического процессора
+
+# Первичная таблица Наименование графического процессора
 
 class Processor(models.Model):
-    name = models.CharField (max_length=150,
+    name = models.CharField(max_length=150,
                             db_index=True,
                             verbose_name='Название графического процессора')
 
@@ -47,7 +49,8 @@ class Processor(models.Model):
     def __str__(self):
         return self.name
 
-#Первичная таблица производителей
+
+# Первичная таблица производителей
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=150,
@@ -65,7 +68,8 @@ class Manufacturer(models.Model):
     def __str__(self):
         return self.name
 
-#Первичная таблица типов памяти
+
+# Первичная таблица типов памяти
 
 class Memory(models.Model):
     name = models.CharField(max_length=150,
@@ -83,7 +87,8 @@ class Memory(models.Model):
     def __str__(self):
         return self.name
 
-#Первичная таблица видеоразъемов
+
+# Первичная таблица видеоразъемов
 class Сonnector(models.Model):
     name = models.CharField(max_length=150,
                             db_index=True,
@@ -100,7 +105,8 @@ class Сonnector(models.Model):
     def __str__(self):
         return self.name
 
-#Первичная таблица типов питания
+
+# Первичная таблица типов питания
 class Power(models.Model):
     name = models.CharField(max_length=150,
                             db_index=True,
@@ -117,107 +123,105 @@ class Power(models.Model):
     def __str__(self):
         return self.name
 
-class Product(models.Model):
 
-#Категории из таблицы Category
+class Product(models.Model):
+    # Категории из таблицы Category
     category = models.ForeignKey(Category, related_name='products',
                                  on_delete=models.CASCADE,
                                  verbose_name='Категория')
-#Название видеокарты
+    # Название видеокарты
     name = models.CharField(max_length=200,
                             db_index=True,
                             verbose_name='Видеокарта')
-#Процессор
+    # Графический процессор
     processor = models.ForeignKey(Processor, related_name='products',
-                                 on_delete=models.CASCADE,
-                                 verbose_name='Графический процессор')
-#Хешрейт
+                                  on_delete=models.CASCADE,
+                                  verbose_name='Графический процессор')
+    # Хешрейт
     hashrate = models.DecimalField(max_digits=5,
                                    decimal_places=2,
-                                   verbose_name='Хешрейт',null=True)
-#Цена
+                                   verbose_name='Хешрейт', null=True)
+    # Цена
     price = models.DecimalField(max_digits=15,
                                 decimal_places=2,
                                 verbose_name='Цена', null=True)
-#Вес
+    # Вес
     weight = models.DecimalField(max_digits=5,
                                  decimal_places=2,
                                  verbose_name='Вес', null=True)
-#LHR
+    # LHR
     lhr = models.BooleanField(default=True,
-                               verbose_name='LHR')
+                              verbose_name='LHR')
 
-#Производитель
+    # Производитель
     manufacturer = models.ForeignKey(Manufacturer, related_name='products',
-                                 on_delete=models.CASCADE,
-                                 verbose_name='Производитель графического процессора')
+                                     on_delete=models.CASCADE,
+                                     verbose_name='Производитель графического процессора')
 
-#Тип памяти
+    # Тип памяти
     memory = models.ForeignKey(Memory, related_name='products',
-                                 on_delete=models.CASCADE,
-                                 verbose_name='Тип памяти')
+                               on_delete=models.CASCADE,
+                               verbose_name='Тип памяти')
 
-#Объем видеопамяти
+    # Объем видеопамяти
     videomemory = models.DecimalField(max_digits=5,
-                                 decimal_places=2,
-                                 verbose_name='Объем видеопамяти', null=True)
-#Частота видеопроцессора
+                                      decimal_places=2,
+                                      verbose_name='Объем видеопамяти', null=True)
+    # Частота видеопроцессора
     frequency = models.DecimalField(max_digits=5,
-                                 decimal_places=2,
-                                 verbose_name='Частота видеопроцессора', null=True)
-#Колличество вентиляторов
+                                    decimal_places=2,
+                                    verbose_name='Частота видеопроцессора', null=True)
+    # Колличество вентиляторов
     cooler = models.DecimalField(max_digits=5,
-                                decimal_places=2,
-                                verbose_name='Колличество вентиляторов', null=True)
+                                 decimal_places=2,
+                                 verbose_name='Колличество вентиляторов', null=True)
 
-#Фото
+    # Фото
     image = models.ImageField(upload_to='products/%Y/%m/%d',
-                          blank=True,
-                          verbose_name='Фото')
+                              blank=True,
+                              verbose_name='Фото')
 
-#Описание
+    # Описание
     description = models.TextField(blank=True,
                                    verbose_name='Описание')
 
-#Энергопотребление
+    # Энергопотребление
     power = models.DecimalField(max_digits=5,
-                             decimal_places=2,
-                             verbose_name='Энергопотребление', null=True)
-
-
-#Видеоразъем
-    connector = models.ForeignKey(Сonnector, related_name='products',
-                                 on_delete=models.CASCADE,
-                                 verbose_name='Видеоразъем')
-
-
-#Питание
-    power = models.ForeignKey(Power, related_name='products',
-                                 on_delete=models.CASCADE,
-                                 verbose_name='Кабеля питания')
-
-#Габариты
-    length = models.DecimalField(max_digits=5,
-                            decimal_places=2,
-                            verbose_name='Длина',null=True)
-    height = models.DecimalField(max_digits=5,
-                            decimal_places=2,
-                            verbose_name='Высота',null=True)
-    width = models.DecimalField(max_digits=5,
-                            decimal_places=2,
-                            verbose_name='Ширина',null=True)
-
-#Цена у конкурентов
-    price_2 = models.DecimalField(max_digits=15,
                                 decimal_places=2,
-                                verbose_name='Цена у конкурентов',null=True)
-#Акция
-    action = models.BooleanField(default=True,
-                               verbose_name='Акция')
+                                verbose_name='Энергопотребление', null=True)
 
-#Новинки
+    # Видеоразъем
+    connector = models.ForeignKey(Сonnector, related_name='products',
+                                  on_delete=models.CASCADE,
+                                  verbose_name='Видеоразъем')
+
+    # Питание
+    power = models.ForeignKey(Power, related_name='products',
+                              on_delete=models.CASCADE,
+                              verbose_name='Кабеля питания')
+
+    # Габариты
+    length = models.DecimalField(max_digits=5,
+                                 decimal_places=2,
+                                 verbose_name='Длина', null=True)
+    height = models.DecimalField(max_digits=5,
+                                 decimal_places=2,
+                                 verbose_name='Высота', null=True)
+    width = models.DecimalField(max_digits=5,
+                                decimal_places=2,
+                                verbose_name='Ширина', null=True)
+
+    # Цена у конкурентов
+    price_2 = models.DecimalField(max_digits=15,
+                                  decimal_places=2,
+                                  verbose_name='Цена у конкурентов', null=True)
+    # Акция
+    action = models.BooleanField(default=True,
+                                 verbose_name='Акция')
+
+    # Новинки
     new = models.BooleanField(default=True,
-                               verbose_name='Новая')
+                              verbose_name='Новая')
 
     slug = models.CharField(max_length=200,
                             db_index=True)
