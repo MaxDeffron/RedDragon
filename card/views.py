@@ -1,12 +1,20 @@
 from django.shortcuts import render
 
 from .models import Product
+from django.contrib.auth.forms import UserCreationForm
 
 def index (request):
     return render(request, "index.html")
 
 def catalog (request):
     return render(request, "catalog.html")
+
+def login (request):
+    return render(request, "../templates/registration/login.html")
+
+def register (request):
+    form = UserCreationForm()
+    return render(request, "../templates/registration/sign-up.html", {"form": form})
 
 def graphiccard (request):
     product = Product.objects.all()
