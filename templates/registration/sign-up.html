@@ -93,9 +93,21 @@
     <div class="login-wrapper">
       <div class="login-items">
         <div class="login-title">Регистрация</div>
+
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+        </form>
+
+          <form action="" class="login-form">
+          <label for="login">Логин</label>
+          <input type="login" placeholder="логин" name="login" required>
+
+
+
         <form action="" class="login-form">
           <label for="login">Логин</label>
-          <input type="login" placeholder="Пароль" name="login" required>
+          <input type="login" placeholder="Логин" name="login" required>
 
           <label for="email">Электронная почта</label>
           <input type="text" placeholder="Email" name="email" pattern=".+@globex\.com" required>
@@ -108,13 +120,17 @@
 
           <button class="btn-shadow__primary" type="submit">Зарегистрироваться</button>
         </form>
+
+
+
+
         <div class="login-text">
           <div><p>Есть аккаунт?</p><a href="login.html">Войти</a></div>
           <a href="#">Забыли пароль?</a>
         </div>
       </div>
     </div>
-    <a href="https://colorlib.com/etc/lf/Login_v2/index.html">хочу так</a>
+    <!--<a href="https://colorlib.com/etc/lf/Login_v2/index.html">хочу так</a>-->
   </div>
 </section>
 
