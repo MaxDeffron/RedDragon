@@ -6,11 +6,19 @@ from django.contrib import messages
 from .forms import registerUserForm, userLoginForm
 from django.contrib.auth import login, logout
 
+# Переходы с главной страницы
+
 def index (request):
     return render(request, "index.html")
 
 def catalog (request):
     return render(request, "catalog.html")
+
+def base (request):
+    return render(request, "../templates/base/base.html")
+
+
+
 
 def registerUser(request):
     if request.method == 'POST':
