@@ -93,37 +93,11 @@
     <div class="login-wrapper">
       <div class="login-items">
         <div class="login-title">Регистрация</div>
-
-        <form method="post">
+        <form method="post" class="login-form">
           {% csrf_token %}
           {{ form.as_p }}
-        </form>
-
-          <form action="" class="login-form">
-          <label for="login">Логин</label>
-          <input type="login" placeholder="логин" name="login" required>
-
-
-
-        <form action="" class="login-form">
-          <label for="login">Логин</label>
-          <input type="login" placeholder="Логин" name="login" required>
-
-          <label for="email">Электронная почта</label>
-          <input type="text" placeholder="Email" name="email" pattern=".+@globex\.com" required>
-
-          <label for="psw">Пароль</label>
-          <input type="password" placeholder="Пароль" name="psw" required>
-
-          <label for="psw-repeat">Подтверждение пароля</label>
-          <input type="password" placeholder="Подтверждение пароля" name="psw-repeat" required>
-
           <button class="btn-shadow__primary" type="submit">Зарегистрироваться</button>
         </form>
-
-
-
-
         <div class="login-text">
           <div><p>Есть аккаунт?</p><a href="login.html">Войти</a></div>
           <a href="#">Забыли пароль?</a>

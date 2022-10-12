@@ -95,12 +95,9 @@
     <div class="login-wrapper">
       <div class="login-items">
         <div class="login-title">Войти или создать профиль</div>
-        <form action="" class="login-form">
-          <label for="email">Электронная почта</label>
-          <input type="text" placeholder="Email" name="email" pattern=".+@globex\.com" required>
-
-          <label for="psw">Пароль</label>
-          <input type="password" placeholder="Пароль" name="psw" required>
+        <form method="post" class="login-form">
+          {% csrf_token %}
+          {{ form.as_p }}
 
           <button class="btn-shadow__primary" type="submit">Войти</button>
         </form>
