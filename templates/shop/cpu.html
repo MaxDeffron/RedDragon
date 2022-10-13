@@ -13,14 +13,16 @@
   <title>Красный дракон</title>
   <link rel="preload" href="fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
+
   <link href="{% static 'css/vendor.css' %}"  link rel="stylesheet">
   <link href="{% static 'css/main.css' %}"  link rel="stylesheet">
-
   <script defer src="{% static 'js/main.js' %}"></script>
+
 
   <!--<link rel="stylesheet" href="css/vendor.css">
   <link rel="stylesheet" href="css/main.css">
   <script defer src="js/main.js"></script>-->
+
 
 </head>
 
@@ -43,8 +45,8 @@
 
     <nav class="header-main">
 
-      <a href="/index.html" class="header-main__logo">
-        <img src="../img/logo.png" alt="logo">
+      <a href="/" class="header-main__logo">
+        <img src="../static/img/logo.png" alt="logo">
         <p>Красный Дракон</p>
       </a>
 
@@ -95,25 +97,15 @@
       <span class="breadcrumb-separator">›</span>
       <li class="breadcrumb-link active"><a href="#">Видеокарты</a></li>
     </ul>
-
-     <!--Шаблон карочки товара-->
-
-
     <div class="graphiccard-wrapper">
       <div class="graphiccard-content">
-        {% for item in product %}
         <div class="graphiccard-item">
           <div class="graphiccard-item__img">
-            <img src="../static/img/exaple_card.jpeg">
+            <img src="../img/exaple_card.jpeg">
           </div>
           <div class="graphiccard-item__wrapper">
-            <div class="graphiccard-item__title">
-              <a href="#" >{{ item.name }}</a></div>
-            <div class="graphiccard-item__descr">
-              <p>Гб {{ item.videomemory }}</p>
-              <p>МГц {{ item.frequency }}</p>
-              <p>{{ item.power }} Вт</p>
-            </div>
+            <div class="graphiccard-item__title"><a href="#" >MSI SuprimX RTX 3090Ti</a></div>
+            <div class="graphiccard-item__descr">Характеристики:</div>
             <div class="graphiccard-item__brand">
               <a href="#" >
                 <img src="../img/msi_logo.png" alt="">
@@ -125,16 +117,14 @@
               <a href="#" class="graphiccard-buy btn-shadow__primary graphiccard-btn">Купить</a>
             </div>
           </div>
-          <!--Конец карочки товара-->
         </div>
-        {% endfor %}
       </div>
       <div class="graphiccard-panel">
         <div class="graphiccard-panel__title">Фильтры</div>
+
       </div>
     </div>
   </div>
-
 </section>
 
     <footer class="footer">

@@ -6,12 +6,17 @@ from card import views
 
 from card.views import index
 from card.views import base
-
-
 from card.views import catalog
-from card.views import graphiccard
+
+#Регистрация
+
 from card.views import registerUser
 from card.views import userLogin
+
+#Магазин
+
+from card.views import graphiccard
+from card.views import cpu
 
 
 urlpatterns = [
@@ -21,16 +26,19 @@ urlpatterns = [
     #Переход с главной страницы
     path('index.html/', index), #на главную страницу
     path('base.html/', base),
-
-
-
-
-
-
-
+    path('login.html/', userLogin),
+    path('login.html/sign-up.html/', registerUser),
     path('catalog.html/', catalog),
-    path('graphiccard.html/', graphiccard),
+
+    #Шаблоны регистрации/входа
     path('login.html/sign-up.html/', registerUser),
     path('login.html/', userLogin),
+
+    #Категории магазина
+    path('graphiccard.html/', graphiccard),
+    path('cpu.html/', cpu),
+
+
+
 ]
 
