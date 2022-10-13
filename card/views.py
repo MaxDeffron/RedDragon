@@ -17,6 +17,24 @@ def catalog (request):
 def base (request):
     return render(request, "../templates/base/base.html")
 
+# Шаблоны интернет магазина
+
+def graphiccard (request):
+    product = Product.objects.all()
+    videomemory = Product.objects.all()
+    frequency = Product.objects.all()
+    power = Product.objects.all()
+    image = Product.objects.all()
+    return render(request, "../templates/shop/graphiccard.html", {'product': product,
+                                                                  'videomemory': videomemory,
+                                                                  'frequency': frequency,
+                                                                  'power': power,
+                                                                  'image': image})
+
+def cpu (request):
+    return render(request, "../templates/shop/cpu.html")
+
+
 
 
 
@@ -44,10 +62,3 @@ def userLogin(request):
         form =userLoginForm()
     return render(request, "../templates/registration/login.html", {"form": form})
 
-def graphiccard (request):
-    product = Product.objects.all()
-    videomemory = Product.objects.all()
-    frequency = Product.objects.all()
-    power = Product.objects.all()
-    image = Product.objects.all()
-    return render(request, "graphiccard.html", {'product':product, 'videomemory':videomemory, 'frequency':frequency, 'power':power, 'image':image})
