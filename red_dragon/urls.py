@@ -1,6 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
+
+
 from card import views
+
+
+from card.views import *
 
 #Переходы с главной страницы
 
@@ -16,7 +21,9 @@ from card.views import userLogin
 #Магазин
 
 from card.views import graphiccard
+from card.views import ManufacturerList
 from card.views import cpu
+
 
 
 urlpatterns = [
@@ -33,12 +40,13 @@ urlpatterns = [
     #Шаблоны регистрации/входа
     path('login.html/sign-up.html/', registerUser),
     path('login.html/', userLogin),
+    path('orders.html/', ordersUser),
+
 
     #Категории магазина
-    path('graphiccard.html/', graphiccard),
+    path('manufacturer_list.html/', graphiccard),
+   #path('manufacturer_list.html/', ManufacturerList.as_view()),
+    path('manufacturer_list.html/', views.ManufacturerListFilter.as_view(), name='filter'),
     path('cpu.html/', cpu),
-
-
-
 ]
 
