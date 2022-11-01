@@ -12,18 +12,14 @@
   <meta name="theme-color" content="#111111">
   <title>Красный дракон</title>
   <link rel="preload" href="fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
-
   <link href="{% static 'css/vendor.css' %}"  link rel="stylesheet">
   <link href="{% static 'css/main.css' %}"  link rel="stylesheet">
-
   <script defer src="{% static 'js/main.js' %}"></script>
 
 
   <!--<link rel="stylesheet" href="css/vendor.css">
   <link rel="stylesheet" href="css/main.css">
   <script defer src="js/main.js"></script>-->
-
-
 
 </head>
 
@@ -56,7 +52,7 @@
         <a href="/catalog.html" class="main__center-catalog btn-primary">Каталог</a>
 
         <form>
-          <input class="main__center-search" id="autoComplete" type="text" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1" required="required" placeholder="Поиск">
+          <input class="main__center-search" name="name" id="id_name" type="text" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1" required="required" placeholder="Найти">
           <button type="reset" class="main__center-reset"><svg width="14" height="23" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
             <path d="M13.5513 11.5L22.8494 2.20245C23.0495 2.00208 23.0495 1.6774 22.8494 1.47702L21.5233 0.150222C21.4271 0.0542739 21.2962 0 21.1603 0C21.0242 0 20.8936 0.0542739 20.7974 0.150222L11.4996 9.44801L2.20179 0.150222C2.00916 -0.0424015 1.66825 -0.0421592 1.47612 0.150222L0.150283 1.47702C-0.0500943 1.6774 -0.0500943 2.00208 0.150283 2.20245L9.44807 11.5L0.150283 20.7975C-0.0500943 20.9979 -0.0500943 21.3226 0.150283 21.523L1.47636 22.8498C1.57255 22.9457 1.70314 23 1.83931 23C1.97548 23 2.10584 22.9457 2.20203 22.8498L11.4998 13.552L20.7976 22.8498C20.8938 22.9457 21.0246 23 21.1606 23C21.2965 23 21.4273 22.9457 21.5235 22.8498L22.8496 21.523C23.0497 21.3226 23.0497 20.9979 22.8496 20.7975L13.5513 11.5Z"/>
             </svg></button>
@@ -89,38 +85,88 @@
 </header>
 
     <div style="padding: 0 0 100px 0;"></div>
-    <section class="catalog">
+    <section class="graphiccard">
   <div class="container">
-    <div class="catalog-wrapper">
-      <h1 class="catalog-title">Выберите категорию</h1>
-      <ul class="breadcrumb">
-        <li><a class="breadcrumb-link" href="/">Главная страница</a></li>
-        <span class="breadcrumb-separator">
-          ›
-        </span>
-        <li class="breadcrumb-link active"><a href="#">Каталог </a></li>
-      </ul>
-      <div class="catalog-items">
-        <a href="/manufacturer_list.html" class="catalog-item">
-          <img src="../static/img/graphiccard.jpg" alt="Видеокарты">
-          <p>Видеокарты</p>
-        </a>
-         <a href="/cpu.html" class="catalog-item">
-          <img src="../static/img/cpu.jpeg" alt="Процессоры">
-          <p>Процессоры</p>
-        </a>
-        <!--<a href="/cpu.html" class="catalog-item">
-          <img src="../static/img/cpu.jpeg" alt="Платы">
-          <p>Платы</p>
-        </a>
-        <a href="/cpu.html" class="catalog-item">
-          <img src="../static/img/cpu.jpeg" alt="Памяти">
-          <p>Памяти</p>
-        </a>-->
+    <ul class="breadcrumb">
+      <li><a class="breadcrumb-link" href="/">Главная страница</a></li>
+      <span class="breadcrumb-separator">›</span>
+      <li class="breadcrumb-link"><a href="/catalog.html">Каталог </a></li>
+      <span class="breadcrumb-separator">›</span>
+      <li class="breadcrumb-link active"><a href="#">Видеокарты</a></li>
+    </ul>
 
+     <!--Шаблон карочки товара-->
+
+    <div class="graphiccard-wrapper">
+      <div class="graphiccard-content">
+         {%  for item in product %}
+        <div class="graphiccard-item">
+          <div class="graphiccard-item__img">
+            <img src="../static/img/exaple_card.jpeg">
+          </div>
+          <div class="graphiccard-item__wrapper">
+            <div class="graphiccard-item__title">
+              <a>{{ item.name }}</a></div>
+            <div class="graphiccard-item__descr">
+              <p>Гб {{ item.videomemory }}</p>
+              <p>МГц {{ item.frequency }}</p>
+              <p>Вт {{ item.power }}</p>
+            </div>
+            <div class="graphiccard-item__brand">
+              <a href="#" >
+                <img src="../img/msi_logo.png" alt="">
+              </a>
+            </div>
+            <div class="graphiccard-item__price"><strong>{{ item.price }}</strong> <span>рублей</span></div>
+            <div class="graphiccard-item__btns">
+              <a href="#" class="graphiccard-link btn-shadow graphiccard-btn">Перейти</a>
+              <a href="#" class="graphiccard-buy btn-shadow__primary graphiccard-btn">Купить</a>
+            </div>
+          </div>
+          <!--Конец карочки товара-->
+        </div>
+        {% endfor %}
       </div>
-    </div>
-  </div>
+
+      <div class="graphiccard-panel">
+          <div class="graphiccard-panel__title">Фильтры</div>
+          <div class="graphiccard-panel__title__filter">Производитель графического процессора</div>
+
+          <form method="get" >
+            <div id='response'></div>
+            {%  for item in product %}
+            <div class="form-check">
+              <input type="checkbox" id="id_manufacturer" name="manufacturer" value="{{item.id}}">
+              <label for="id_manufacturer">{{item.manufacturer}}</label>
+            </div>
+             {% endfor %}
+            <button type="submit" class=" btn btn-primary">Найти</button>
+            </form>
+         <script src="{% static 'ajax/main.js' %}"></script>
+          </div>
+
+
+
+
+
+
+          <!--<div class="form-check">
+             <form action="../templates/card/manufacturer_list.html" method="post" >
+                  {% csrf_token %}
+                  {{ form.as_p}}
+                 <button type="submit" class=" btn btn-primary">Найти</button>
+              </form>
+          </div>-->
+
+
+
+
+
+
+
+
+
+
 </section>
 
     <footer class="footer">
@@ -173,5 +219,4 @@
 
   </div>
 </body>
-
 </html>

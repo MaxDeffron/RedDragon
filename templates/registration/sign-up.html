@@ -18,12 +18,6 @@
   <link href="{% static 'css/main.css' %}"  link rel="stylesheet">
 
   <script defer src="{% static 'js/main.js' %}"></script>
-
-  <!--<link rel="stylesheet" href="css/vendor.css">
-  <link rel="stylesheet" href="css/main.css">
-  <script defer src="js/main.js"></script>-->
-
-
 </head>
 
 <body class="page__body">
@@ -46,7 +40,7 @@
     <nav class="header-main">
 
       <a href="/" class="header-main__logo">
-        <img src="../static/img/logo.png/" alt="logo">
+        <img src="/static/img/logo.png" alt="logo">
         <p>Красный Дракон</p>
       </a>
 
@@ -95,9 +89,19 @@
     <div class="login-wrapper">
       <div class="login-items">
         <div class="login-title">Регистрация</div>
-        <form method="post" class="login-form">
-          {% csrf_token %}
-          {{ form.as_p }}
+        <form action="" class="login-form">
+          <label for="login">Логин</label>
+          <input type="login" placeholder="Пароль" name="login" required>
+
+          <label for="email">Электронная почта</label>
+          <input type="text" placeholder="Email" name="email" pattern=".+@globex\.com" required>
+
+          <label for="psw">Пароль</label>
+          <input type="password" placeholder="Пароль" name="psw" required>
+
+          <label for="psw-repeat">Подтверждение пароля</label>
+          <input type="password" placeholder="Подтверждение пароля" name="psw-repeat" required>
+
           <button class="btn-shadow__primary" type="submit">Зарегистрироваться</button>
         </form>
         <div class="login-text">
@@ -106,7 +110,7 @@
         </div>
       </div>
     </div>
-    <!--<a href="https://colorlib.com/etc/lf/Login_v2/index.html">хочу так</a>-->
+    <a href="https://colorlib.com/etc/lf/Login_v2/index.html">хочу так</a>
   </div>
 </section>
 
