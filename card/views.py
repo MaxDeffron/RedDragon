@@ -5,7 +5,7 @@ from .forms import registerUserForm, userLoginForm, productSelect
 from django.contrib.auth import login, logout
 from django.views.generic.base import View
 from django_filters.rest_framework import DjangoFilterBackend
-from  django_filters import rest_framework as filters
+from django_filters import rest_framework as filters
 from .filters import ClientFilter
 from .filters import SearchClientFilter
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -34,6 +34,9 @@ def base (request):
 
 def ordersUser (request):
     return render(request, "orders.html")
+
+def profileUser (request):
+    return render(request, "profile.html")
 
 # Шаблоны интернет магазина
 
@@ -92,7 +95,8 @@ def registerUser(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             messages.success(request, 'Account created successfully')
             return redirect("../templates/registration/login.html")
         else:
@@ -101,16 +105,21 @@ def registerUser(request):
         form = registerUserForm()
     return render(request, "../templates/registration/sign-up.html", {"form": form})
 
+def userLogout(request):
+    logout(request)
+    return redirect("../templates/registration/login.html")
+
+
 def userLogin(request):
     if request.method == 'POST':
         form = userLoginForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            redirect("../templates/registration/login.html")
+            return redirect("/profile.html")
     else:
         form =userLoginForm()
-    return render(request, "../templates/profile.html", {"form": form})
+    return render(request, "../templates/registration/login.html", {"form": form})
 
 
 
