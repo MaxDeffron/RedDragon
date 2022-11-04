@@ -34,6 +34,7 @@ urlpatterns = [
     path('index.html/', index), #на главную страницу
     path('base.html/', base),
     path('login.html/', userLogin),
+    path('login.html/', userLogout),
     path('login.html/sign-up.html/', registerUser),
     path('catalog.html/', catalog),
 
@@ -41,6 +42,7 @@ urlpatterns = [
     path('login.html/sign-up.html/', registerUser),
     path('login.html/', userLogin),
     path('orders.html/', ordersUser),
+    path('profile.html/', profileUser),
 
 
     #Категории магазина
