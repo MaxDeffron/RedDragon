@@ -1,8 +1,4 @@
 from django.contrib import admin
-<<<<<<< HEAD
-
-# Register your models here.
-=======
 from .models import Category, Processor, Manufacturer, Memory, Сonnector, Power, Product
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -59,4 +55,3 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 admin.site.register(Product, ProductAdmin)
->>>>>>> models_db
