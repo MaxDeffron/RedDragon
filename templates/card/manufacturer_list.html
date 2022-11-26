@@ -15,6 +15,8 @@
   <link href="{% static 'css/vendor.css' %}"  link rel="stylesheet">
   <link href="{% static 'css/main.css' %}"  link rel="stylesheet">
   <script defer src="{% static 'js/main.js' %}"></script>
+  <script defer src="{% static 'js/script.js' %}"></script>
+
 
 
   <!--<link rel="stylesheet" href="css/vendor.css">
@@ -119,8 +121,8 @@
             </div>
             <div class="graphiccard-item__price"><strong>{{ item.price }}</strong> <span>рублей</span></div>
             <div class="graphiccard-item__btns">
-              <a href="#" class="graphiccard-link btn-shadow graphiccard-btn">Перейти</a>
-              <a href="#" class="graphiccard-buy btn-shadow__primary graphiccard-btn">Купить</a>
+              <!--<a href="#" class="graphiccard-link btn-shadow graphiccard-btn">Перейти</a>-->
+              <button value="{{ item.id }}" class="graphiccard-buy btn-shadow__primary graphiccard-btn">Купить</button>
             </div>
           </div>
           <!--Конец карочки товара-->
@@ -163,12 +165,7 @@
 
 
 
-
-
-
-
 </section>
-
     <footer class="footer">
   <div class="container">
     <div class="footer-items">

@@ -9,18 +9,8 @@ from card.models import Manufacturer
 
 from card.models import Product
 
-
-
 class productSelect(forms.Form):
    manufacturer = forms.ModelChoiceField(queryset=Manufacturer.objects.all())
-
-
-
-
-
-
-
-
 
 class userLoginForm(AuthenticationForm):
     username = forms.CharField(label='Логин',
@@ -29,8 +19,6 @@ class userLoginForm(AuthenticationForm):
 
     password = forms.CharField(label='Пароль',
                                widget=forms.PasswordInput)
-
-
 
 class registerUserForm(UserCreationForm):
     username = forms.CharField(label='Логин',
@@ -48,4 +36,3 @@ class registerUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
-

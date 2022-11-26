@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Processor, Manufacturer, Memory, Сonnector, Power, Product
+from .models import Category, Processor, Manufacturer, Memory, Сonnector, Power, Product, Cart, CartItem
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
@@ -55,3 +55,12 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 admin.site.register(Product, ProductAdmin)
+
+
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'completed']
+admin.site.register(Cart, CartAdmin)
+
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ['product', 'cart', 'quantity']
+admin.site.register(CartItem, CartItemAdmin)

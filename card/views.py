@@ -1,20 +1,25 @@
-from django.shortcuts import render, redirect
+import json
+
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import registerUserForm, userLoginForm, productSelect
+from .forms import registerUserForm, userLoginForm
 from django.contrib.auth import login, logout
-from django.views.generic.base import View
-from django_filters.rest_framework import DjangoFilterBackend
-from django_filters import rest_framework as filters
 from .filters import ClientFilter
 from .filters import SearchClientFilter
-from rest_framework.filters import SearchFilter, OrderingFilter
+from django.contrib.auth.decorators import login_required
+
+from django.http import JsonResponse
+import json
+
 
 
 # Импорт моделей БД
 
 from .models import Product
 from .models import Manufacturer
+from .models import Cart
+from .models import CartItem
 
 # Импорт ListView
 
@@ -32,18 +37,20 @@ def catalog (request):
 def base (request):
     return render(request, "../templates/base/base.html")
 
+@login_required(login_url= '/login.html')
 def ordersUser (request):
     return render(request, "orders.html")
 
+@login_required(login_url= '/login.html')
 def profileUser (request):
     return render(request, "profile.html")
 
 # Шаблоны интернет магазина
 
-
-
 def graphiccard (request):
     product = Product.objects.all()
+
+
     clientFilter = ClientFilter(request.GET, queryset=product,)
     product = clientFilter.qs
 
@@ -67,6 +74,7 @@ def graphiccard (request):
                                                                         'image': image,
                                                                         'clientFilter':clientFilter,
                                                                         'searchClientFilter': searchClientFilter,
+                                                                        'id': id,
 
                                                                         #'form':form,
                                                                   })
@@ -105,11 +113,6 @@ def registerUser(request):
         form = registerUserForm()
     return render(request, "../templates/registration/sign-up.html", {"form": form})
 
-def userLogout(request):
-    logout(request)
-    return redirect("../templates/registration/login.html")
-
-
 def userLogin(request):
     if request.method == 'POST':
         form = userLoginForm(data=request.POST)
@@ -121,8 +124,49 @@ def userLogin(request):
         form =userLoginForm()
     return render(request, "../templates/registration/login.html", {"form": form})
 
+def userLogout(request):
+    logout(request)
+    return redirect("../templates/registration/login.html")
+
+#Корзина
+
+def cart(request):
+
+    cart = None
+    cartitems = []
+
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+        cartitems = cart.cartitems.all()
 
 
 
 
+    context = {"cart":cart, "items":cartitems}
+    return render(request, "../templates/cart/cart.html", context)
+
+def addToCart(request):
+    data = json.loads(request.body)
+    product_id = data["id"]
+    product = Product.objects.get(id=product_id)
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+        cartitem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        cartitem.quantity += 1
+        cartitem.save()
+        print(cartitem)
+
+    return JsonResponse("It is working", safe=False)
+
+
+
+
+
+    #data = json.load(request.body)
+    #item_id = data["id"]
+    #product = Product.objects.get(id=item_id)
+
+    #if request.user.is_authenticated:
+    #    cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+    #return JsonResponse("It is working", safe=False)
 

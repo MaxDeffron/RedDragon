@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 
 from card import views
@@ -17,6 +17,7 @@ from card.views import catalog
 
 from card.views import registerUser
 from card.views import userLogin
+
 
 #Магазин
 
@@ -44,11 +45,16 @@ urlpatterns = [
     path('orders.html/', ordersUser),
     path('profile.html/', profileUser),
 
+    #Корзина товаров
+    path("addToCart", views.addToCart, name="add"),
+    path("cart.html", cart),
+
 
     #Категории магазина
     path('manufacturer_list.html/', graphiccard),
    #path('manufacturer_list.html/', ManufacturerList.as_view()),
     path('manufacturer_list.html/', views.ManufacturerListFilter.as_view(), name='filter'),
     path('cpu.html/', cpu),
+
 ]
 
